@@ -146,7 +146,7 @@ namespace ACT.SpecialSpellTimer
                 try
                 {
                     Logger.Init();
-                    Logger.Write("Plugin Start.");
+                    Logger.Write("[SPESPE] Start InitPlugin");
 
                     // .NET Frameworkのバージョンを確認する
                     if (!UpdateChecker.IsAvailableDotNet())
@@ -210,18 +210,14 @@ namespace ACT.SpecialSpellTimer
                     this.SetSwitchVisibleButton();
                     this.PluginStatusLabel.Text = "Plugin Started";
 
-                    Logger.Write("Plugin Started.");
+                    Logger.Write("[SPESPE] End InitPlugin");
 
                     // アップデートを確認する
                     await Task.Run(() => this.Update());
                 }
                 catch (Exception ex)
                 {
-                    ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        "Plugin init error.");
-
-                    Logger.Write("Plugin init error.", ex);
+                    Logger.Write("InitPlugin error.", ex);
 
                     if (this.PluginStatusLabel != null)
                     {
