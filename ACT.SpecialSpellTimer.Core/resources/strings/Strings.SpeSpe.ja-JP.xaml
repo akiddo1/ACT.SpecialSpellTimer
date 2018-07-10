@@ -178,6 +178,7 @@
   <system:String x:Key="Options_ProgressBarBackgroudColor">プログレスバーの背景色</system:String>
 
   <system:String x:Key="Options_TimeToHide">リキャスト完了後に消去するまでの時間（秒） ※0秒で消去しない</system:String>
+  <system:String x:Key="Options_WaitingTimeToSyncTTS">シンクロTTSの受付時間（ミリ秒）</system:String>
   <system:String x:Key="Options_EnabledPartyPlaceholder">パーティメンバのプレースホルダを有効にする ※&lt;2&gt;～&lt;8&gt;等が使用できるようになります。ただし順序は実際のパーティリストとは異なる場合があります。</system:String>
   <system:String x:Key="Options_EnabledNotifyDefaultSpellTimer">ACT本体のスペルタイマにも通知する（試験的機能）</system:String>
   <system:String x:Key="Options_EnabledSimplyRegex">正規表現を単純にする</system:String>

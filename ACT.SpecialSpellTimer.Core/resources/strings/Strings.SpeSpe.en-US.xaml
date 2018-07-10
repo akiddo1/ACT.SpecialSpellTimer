@@ -178,6 +178,7 @@
   <system:String x:Key="Options_ProgressBarBackgroudColor">Progress bar background color</system:String>
 
   <system:String x:Key="Options_TimeToHide">Hide spell timers after completion (secounds)   * Disabled when set to 0 (never hides)</system:String>
+  <system:String x:Key="Options_WaitingTimeToSyncTTS">Waiting time to Sync TTS (milli seconds)</system:String>
   <system:String x:Key="Options_EnabledPartyPlaceholder">Use party member names in matching.  *&lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect.</system:String>
   <system:String x:Key="Options_EnabledNotifyDefaultSpellTimer">Notify ACT's spell timer</system:String>
   <system:String x:Key="Options_EnabledSimplyRegex">Simply Regex</system:String>

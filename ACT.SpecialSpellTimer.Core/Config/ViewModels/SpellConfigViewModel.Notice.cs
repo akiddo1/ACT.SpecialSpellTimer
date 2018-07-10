@@ -15,13 +15,13 @@ namespace ACT.SpecialSpellTimer.Config.ViewModels
             Func<string> getWave,
             AdvancedNoticeConfig noticeConfig)
             => new DelegateCommand(()
-                => noticeConfig.PlayWave(getWave()));
+                => this.Model.Play(getWave(), noticeConfig));
 
         private ICommand CreateTestTTSCommand(
             Func<string> getTTS,
             AdvancedNoticeConfig noticeConfig)
             => new DelegateCommand(()
-                => noticeConfig.Speak(getTTS()));
+                => this.Model.Play(getTTS(), noticeConfig));
 
         private ICommand testWave1Command;
         private ICommand testWave2Command;

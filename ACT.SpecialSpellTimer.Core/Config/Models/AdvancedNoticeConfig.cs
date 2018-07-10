@@ -20,14 +20,9 @@ namespace ACT.SpecialSpellTimer.Config.Models
         ICloneable
     {
         /// <summary>
-        /// シンクロTTSの受付時間 (ミリ秒)
-        /// </summary>
-        public const double SyncTTSWaitingTime = 60;
-
-        /// <summary>
         /// シンクロTTSの発声間隔 (ミリ秒)
         /// </summary>
-        public const double SyncTTSInterval = 10;
+        public const double SyncTTSInterval = 5;
 
         #region Available TTSYukkuri
 
@@ -97,9 +92,6 @@ namespace ACT.SpecialSpellTimer.Config.Models
 
         [XmlIgnore]
         private static System.Timers.Timer syncSpeakTimer;
-
-        [XmlIgnore]
-        private static AdvancedNoticeConfig lastConfig;
 
         private static void PlayWaveCore(
             string wave,
@@ -231,10 +223,12 @@ namespace ACT.SpecialSpellTimer.Config.Models
 
             lock (SyncList)
             {
+                var interval = Settings.Default.WaitingTimeToSyncTTS;
+
                 if (syncSpeakTimer == null)
                 {
                     // シンクロTTSの受付タイマを生成する
-                    syncSpeakTimer = new System.Timers.Timer(SyncTTSWaitingTime)
+                    syncSpeakTimer = new System.Timers.Timer(interval)
                     {
                         AutoReset = false
                     };
@@ -243,8 +237,10 @@ namespace ACT.SpecialSpellTimer.Config.Models
                 }
 
                 syncSpeakTimer.Stop();
-                SyncList.Add(new SyncTTS(SyncList.Count, priority, speakText));
-                lastConfig = config;
+                syncSpeakTimer.Interval = interval;
+
+                SyncList.Add(new SyncTTS(SyncList.Count, priority, speakText, config));
+
                 syncSpeakTimer.Start();
             }
         }
@@ -257,7 +253,7 @@ namespace ACT.SpecialSpellTimer.Config.Models
             {
                 try
                 {
-                    var texts =
+                    var syncs =
                         from x in SyncList
                         where
                         !string.IsNullOrEmpty(x.Text)
@@ -265,9 +261,9 @@ namespace ACT.SpecialSpellTimer.Config.Models
                         x.Priority,
                         x.Seq
                         select
-                        x.Text;
+                        x;
 
-                    var config = lastConfig;
+                    var config = syncs.FirstOrDefault()?.Config;
                     if (config == null)
                     {
                         return;
@@ -275,14 +271,14 @@ namespace ACT.SpecialSpellTimer.Config.Models
 
                     if (!PlayBridge.Instance.IsSyncAvailable)
                     {
-                        var text = string.Join(Environment.NewLine, texts);
+                        var text = string.Join(Environment.NewLine, syncs.Select(x => x.Text));
                         SpeakCore(text, config);
                     }
                     else
                     {
-                        foreach (var text in texts)
+                        foreach (var sync in syncs)
                         {
-                            SpeakCore(text, config, true);
+                            SpeakCore(sync.Text, config, true);
                             Thread.Sleep(TimeSpan.FromMilliseconds(SyncTTSInterval));
                         }
                     }
@@ -306,11 +302,13 @@ namespace ACT.SpecialSpellTimer.Config.Models
             public SyncTTS(
                 int seq,
                 double priority,
-                string text)
+                string text,
+                AdvancedNoticeConfig config)
             {
                 this.Seq = seq;
                 this.Priority = priority;
                 this.Text = text;
+                this.Config = config;
             }
 
             public int Seq { get; set; }
@@ -318,6 +316,8 @@ namespace ACT.SpecialSpellTimer.Config.Models
             public double Priority { get; set; }
 
             public string Text { get; set; }
+
+            public AdvancedNoticeConfig Config { get; set; }
         }
     }
 }

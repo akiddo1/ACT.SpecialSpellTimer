@@ -73,6 +73,9 @@
     <Label Margin="0 15 0 0" Content="{DynamicResource Options_TimeToHide}" />
     <xctk:DoubleUpDown Value="{Binding Config.TimeOfHideSpell, Mode=TwoWay}" MinWidth="60" FormatString="F0" />
 
+    <Label Margin="0 15 0 0" Content="{DynamicResource Options_WaitingTimeToSyncTTS}" />
+    <xctk:DoubleUpDown Value="{Binding Config.WaitingTimeToSyncTTS, Mode=TwoWay}" MinWidth="75" FormatString="F0" Maximum="1000" Minimum="20" />
+
     <CheckBox Margin="0 20 0 0" Content="{DynamicResource Options_EnabledPartyPlaceholder}" IsChecked="{Binding Config.EnabledPartyMemberPlaceholder, Mode=TwoWay}" />
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledNotifyDefaultSpellTimer}" IsChecked="{Binding Config.NotifyNormalSpellTimerPrefix, Mode=TwoWay}" />
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledSimplyRegex}" IsChecked="{Binding Config.SimpleRegex, Mode=TwoWay}" />

@@ -344,6 +344,14 @@ namespace ACT.SpecialSpellTimer.Config
 
         public bool WipeoutNotifyToACT { get; set; }
 
+        private double waitingTimeToSyncTTS = 100;
+
+        public double WaitingTimeToSyncTTS
+        {
+            get => this.waitingTimeToSyncTTS;
+            set => this.SetProperty(ref this.waitingTimeToSyncTTS, value);
+        }
+
         #region LPS View
 
         private bool lpsViewVisible = false;
