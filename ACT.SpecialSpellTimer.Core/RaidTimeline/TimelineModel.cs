@@ -431,6 +431,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
         private static TimelineRazorModel razorModel;
 
+        public static TimelineRazorModel RazorModel => razorModel;
+
         /// <summary>
         /// Razorパーサに渡すモデルを更新する
         /// </summary>

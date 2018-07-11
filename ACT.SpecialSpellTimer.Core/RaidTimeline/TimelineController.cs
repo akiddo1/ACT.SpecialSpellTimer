@@ -1854,8 +1854,10 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 }
             }
 
+            var isSync = TimelineModel.RazorModel?.SyncTTS ?? false;
+
             RaiseLog(log);
-            NotifySound(notice, act.NoticeDevice.GetValueOrDefault());
+            NotifySound(notice, act.NoticeDevice.GetValueOrDefault(), isSync);
 
             var vnotices = act.VisualNoticeStatements
                 .Where(x => x.Enabled.GetValueOrDefault())
@@ -1949,8 +1951,10 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 }
             }
 
+            var isSync = TimelineModel.RazorModel?.SyncTTS ?? false;
+
             RaiseLog(log);
-            NotifySound(notice, tri.NoticeDevice.GetValueOrDefault());
+            NotifySound(notice, tri.NoticeDevice.GetValueOrDefault(), isSync);
 
             var vnotices = tri.VisualNoticeStatements
                 .Where(x => x.Enabled.GetValueOrDefault());
@@ -2049,7 +2053,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
         private static void NotifySound(
             string notice,
-            NoticeDevices device)
+            NoticeDevices device,
+            bool isSync = false)
         {
             if (string.IsNullOrEmpty(notice))
             {
@@ -2097,15 +2102,15 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             switch (device)
             {
                 case NoticeDevices.Both:
-                    SoundController.Instance.Play(notice);
+                    SoundController.Instance.Play(notice, isSync);
                     break;
 
                 case NoticeDevices.Main:
-                    PlayBridge.Instance.PlayMain(notice);
+                    PlayBridge.Instance.PlayMain(notice, isSync);
                     break;
 
                 case NoticeDevices.Sub:
-                    PlayBridge.Instance.PlaySub(notice);
+                    PlayBridge.Instance.PlaySub(notice, isSync);
                     break;
             }
 

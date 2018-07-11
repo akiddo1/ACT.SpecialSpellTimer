@@ -116,7 +116,8 @@ namespace ACT.SpecialSpellTimer.Sound
         /// <param name="source">
         /// 再生する対象</param>
         public void Play(
-            string source)
+            string source,
+            bool isSync = false)
         {
             try
             {
@@ -135,7 +136,7 @@ namespace ACT.SpecialSpellTimer.Sound
                     {
                         if (PlayBridge.Instance.IsAvailable)
                         {
-                            PlayBridge.Instance.Play(source);
+                            PlayBridge.Instance.Play(source, isSync);
                         }
                         else
                         {
@@ -149,7 +150,7 @@ namespace ACT.SpecialSpellTimer.Sound
 
                     if (PlayBridge.Instance.IsAvailable)
                     {
-                        PlayBridge.Instance.Play(source);
+                        PlayBridge.Instance.Play(source, isSync);
                     }
                     else
                     {

@@ -15,6 +15,9 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 #if false
         public EorzeaTime ET => this.LT.ToEorzeaTime();
 #endif
+
+        public bool SyncTTS { get; set; } = false;
+
         public string Zone { get; set; } = string.Empty;
 
         public string Locale { get; set; } = Locales.JA.ToString();
