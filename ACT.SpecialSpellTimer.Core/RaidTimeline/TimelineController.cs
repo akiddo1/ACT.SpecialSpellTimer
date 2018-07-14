@@ -1734,7 +1734,6 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
         private static readonly object NoticeLocker = new object();
         private readonly ConcurrentQueue<TimelineBase> NotifyQueue = new ConcurrentQueue<TimelineBase>();
-        private const double NotifyInterval = 50;
 
         private ThreadWorker notifyWorker;
         private volatile bool isNotifyExcuting = false;
@@ -1747,9 +1746,9 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 {
                     this.notifyWorker = new ThreadWorker(
                         this.DoNotify,
-                        NotifyInterval,
+                        TimelineSettings.Instance.NotifyInterval,
                         "TimelineNotifyWorker",
-                        ThreadPriority.BelowNormal);
+                        ThreadPriority.Normal);
                 }
             }
 
@@ -1771,7 +1770,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
         private void DoNotify()
         {
-            this.notifyWorker.Interval = NotifyInterval;
+            this.notifyWorker.Interval = TimelineSettings.Instance.NotifyInterval;
 
             if (this.NotifyQueue.IsEmpty)
             {

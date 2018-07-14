@@ -245,6 +245,7 @@
   <system:String x:Key="Timeline_Enable">スペスペたいむ™ を使用する</system:String>
   <system:String x:Key="Timeline_Folder">タイムラインの参照フォルダ</system:String>
   <system:String x:Key="Timeline_Visual">スペスペたいむ™ の設定</system:String>
+  <system:String x:Key="Timeline_NotifyInterval">通知スレッドの間隔(ms)</system:String>
   <system:String x:Key="Timeline_OverlayVisible">オーバーレイを表示する</system:String>
   <system:String x:Key="Timeline_Opacity">不透明度</system:String>
   <system:String x:Key="Timeline_OverlayScale">オーバーレイのスケール</system:String>

@@ -108,6 +108,14 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             set => this.SetProperty(ref this.noticeLeft, Math.Round(value));
         }
 
+        private double notifyInterval = 20;
+
+        public double NotifyInterval
+        {
+            get => this.notifyInterval;
+            set => this.SetProperty(ref this.notifyInterval, value);
+        }
+
         private double noticeTop = 10;
 
         public double NoticeTop

@@ -245,6 +245,7 @@
   <system:String x:Key="Timeline_Enable">Use Timeline</system:String>
   <system:String x:Key="Timeline_Folder">Timelines folder</system:String>
   <system:String x:Key="Timeline_Visual">SPESPE Time Settings</system:String>
+  <system:String x:Key="Timeline_NotifyInterval">Notify interval (ms)</system:String>
   <system:String x:Key="Timeline_OverlayVisible">Show overlay</system:String>
   <system:String x:Key="Timeline_Opacity">Opacity</system:String>
   <system:String x:Key="Timeline_OverlayScale">Overlay scale</system:String>

@@ -206,10 +206,17 @@
       <Grid Margin="5">
         <TextBlock Grid.Row="0" Margin="0 10 0 0" Text="{DynamicResource Timeline_Visual}" FontWeight="Black" />
 
-        <StackPanel Margin="0 40 0 0">
-          <CheckBox Margin="0 0 0 0" Content="{DynamicResource Timeline_OverlayVisible}" IsChecked="{Binding Path=TimelineConfig.OverlayVisible, Mode=TwoWay}" Command="{Binding ShowOverlayCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
-          <CheckBox Margin="0 5 0 0" Content="{DynamicResource Tree_Clickthrough}" IsChecked="{Binding Path=TimelineConfig.Clickthrough, Mode=TwoWay}" Command="{Binding ClickthroughCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
-          <CheckBox Margin="0 5 0 0" Content="{DynamicResource Timeline_ShowDummyTimeline}" IsChecked="{Binding Path=TimelineConfig.DesignMode, Mode=TwoWay}" Foreground="Green" FontWeight="Bold" Command="{Binding ShowDummyOverlayCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
+        <StackPanel Margin="0 40 0 0" Orientation="Horizontal">
+          <StackPanel>
+            <CheckBox Margin="0 0 0 0" Content="{DynamicResource Timeline_OverlayVisible}" IsChecked="{Binding Path=TimelineConfig.OverlayVisible, Mode=TwoWay}" Command="{Binding ShowOverlayCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
+            <CheckBox Margin="0 5 0 0" Content="{DynamicResource Tree_Clickthrough}" IsChecked="{Binding Path=TimelineConfig.Clickthrough, Mode=TwoWay}" Command="{Binding ClickthroughCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
+            <CheckBox Margin="0 5 0 0" Content="{DynamicResource Timeline_ShowDummyTimeline}" IsChecked="{Binding Path=TimelineConfig.DesignMode, Mode=TwoWay}" Foreground="Green" FontWeight="Bold" Command="{Binding ShowDummyOverlayCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" />
+          </StackPanel>
+
+          <StackPanel Margin="50 0 0 0">
+            <Label Margin="0 0 0 0" Content="{DynamicResource Timeline_NotifyInterval}" />
+            <xctk:DoubleUpDown Value="{Binding Path=TimelineConfig.NotifyInterval, Mode=TwoWay}" FormatString="N0" Increment="1" Width="80" HorizontalAlignment="Left" Minimum="1" Maximum="500" />
+          </StackPanel>
         </StackPanel>
 
         <TabControl Margin="0 120 0 0">
