@@ -16,6 +16,7 @@ using Advanced_Combat_Tracker;
 using FFXIV.Framework.Extensions;
 using FFXIV.Framework.FFXIVHelper;
 using FFXIV.Framework.Globalization;
+using FFXIV.Framework.WPF.Views;
 using Prism.Mvvm;
 using TamanegiMage.FFXIV_MemoryReader.Model;
 

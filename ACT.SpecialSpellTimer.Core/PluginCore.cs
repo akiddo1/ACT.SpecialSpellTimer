@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using System.Windows.Threading;
 using ACT.SpecialSpellTimer.Config;
-using ACT.SpecialSpellTimer.Config.Views;
 using ACT.SpecialSpellTimer.Models;
 using ACT.SpecialSpellTimer.RaidTimeline;
 using ACT.SpecialSpellTimer.Sound;
@@ -16,6 +16,7 @@ using ACT.SpecialSpellTimer.Views;
 using Advanced_Combat_Tracker;
 using FFXIV.Framework.Common;
 using FFXIV.Framework.FFXIVHelper;
+using FFXIV.Framework.WPF.Views;
 
 namespace ACT.SpecialSpellTimer
 {
@@ -108,12 +109,6 @@ namespace ACT.SpecialSpellTimer
                 {
                     this.PluginStatusLabel.Text = "Plugin Exit Error";
                 }
-
-                ModernMessageBox.ShowDialog(
-                    "Plugin deinit error !",
-                    "ACT.SpecialSpellTimer",
-                    System.Windows.MessageBoxButton.OK,
-                    ex);
             }
 
             Logger.DeInit();
@@ -162,6 +157,7 @@ namespace ACT.SpecialSpellTimer
                     if (Settings.Default.IsMinimizeOnStart)
                     {
                         ActGlobals.oFormActMain.WindowState = FormWindowState.Minimized;
+                        Application.DoEvents();
                     }
 
                     // HojoringのSplashを表示する
@@ -248,10 +244,11 @@ namespace ACT.SpecialSpellTimer
                 this.SwitchOverlay(visible);
             });
 
-            ActInvoker.Invoke(() =>
+            await WPFHelper.InvokeAsync(() =>
             {
                 this.ChangeButtonColor();
-            });
+            },
+            DispatcherPriority.Normal);
         }
 
         public void ChangeButtonColor()
@@ -284,7 +281,7 @@ namespace ACT.SpecialSpellTimer
             }
         }
 
-        private void ReplaceButton()
+        private async void ReplaceButton()
         {
             if (this.SwitchVisibleButton != null &&
                 !this.SwitchVisibleButton.IsDisposed &&
@@ -307,7 +304,7 @@ namespace ACT.SpecialSpellTimer
                     new Point(leftButton.Left - this.SwitchVisibleButton.Width - 1, 0) :
                     new Point(ActGlobals.oFormActMain.Width - 533, 0);
 
-                ActInvoker.Invoke(() =>
+                await WPFHelper.InvokeAsync(() =>
                 {
                     if (this.SwitchVisibleButton != null)
                     {

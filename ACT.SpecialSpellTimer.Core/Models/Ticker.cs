@@ -8,11 +8,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using ACT.SpecialSpellTimer.Config.Models;
-using ACT.SpecialSpellTimer.Config.Views;
 using ACT.SpecialSpellTimer.Sound;
 using ACT.SpecialSpellTimer.Utility;
 using FFXIV.Framework.Common;
 using FFXIV.Framework.Extensions;
+using FFXIV.Framework.WPF.Views;
 
 namespace ACT.SpecialSpellTimer.Models
 {

@@ -11,6 +11,7 @@ using ACT.SpecialSpellTimer.Models;
 using ACT.SpecialSpellTimer.resources;
 using FFXIV.Framework.Common;
 using FFXIV.Framework.Globalization;
+using FFXIV.Framework.WPF.Views;
 
 namespace ACT.SpecialSpellTimer.Config.Views
 {

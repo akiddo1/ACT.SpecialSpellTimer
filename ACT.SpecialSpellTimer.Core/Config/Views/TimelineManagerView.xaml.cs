@@ -16,6 +16,7 @@ using ACT.SpecialSpellTimer.resources;
 using Advanced_Combat_Tracker;
 using FFXIV.Framework.Common;
 using FFXIV.Framework.Globalization;
+using FFXIV.Framework.WPF.Views;
 using Prism.Commands;
 
 namespace ACT.SpecialSpellTimer.Config.Views

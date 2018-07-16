@@ -10,6 +10,7 @@ using System.Windows.Input;
 using ACT.SpecialSpellTimer.resources;
 using ACT.SpecialSpellTimer.Sound;
 using FFXIV.Framework.Globalization;
+using FFXIV.Framework.WPF.Views;
 using Prism.Commands;
 
 namespace ACT.SpecialSpellTimer.Config.Views

@@ -110,9 +110,6 @@
     <Compile Include="Config\Views\AddToTagView.xaml.cs">
       <DependentUpon>AddToTagView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Config\Views\ModernMessageBox.xaml.cs">
-      <DependentUpon>ModernMessageBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Config\Views\DesignGridView.xaml.cs">
       <DependentUpon>DesignGridView.xaml</DependentUpon>
     </Compile>
@@ -930,10 +927,6 @@
     <Page Include="Config\Views\CalendarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Config\Views\ModernMessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Config\Views\DesignGridView.xaml">
       <SubType>Designer</SubType>
