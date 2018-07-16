@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Media;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using ACT.SpecialSpellTimer.Config;
 using ACT.SpecialSpellTimer.Models;
@@ -354,12 +355,65 @@ namespace ACT.SpecialSpellTimer
 
         #region ログ処理
 
+        /*
+        // ダメージ系ログ
+        "] 00:0aa9:",
+        "] 00:0b29:",
+        "] 00:1129:",
+        "] 00:12a9:",
+        "] 00:1329:",
+        "] 00:28a9:",
+        "] 00:2929:",
+        "] 00:2c29:",
+        "] 00:2ca9:",
+        "] 00:30a9:",
+        "] 00:3129:",
+        "] 00:32a9:",
+        "] 00:3429:",
+        "] 00:34a9:",
+        "] 00:3aa9:",
+        "] 00:42a9:",
+        "] 00:4aa9:",
+        "] 00:4b29:",
+
+        // 回復系ログ
+        "] 00:08ad:",
+        "] 00:092d:",
+        "] 00:0c2d:",
+        "] 00:0cad:",
+        "] 00:10ad:",
+        "] 00:112d:",
+        "] 00:142d:",
+        "] 00:14ad:",
+        "] 00:28ad:",
+        "] 00:292d:",
+        "] 00:2aad:",
+        "] 00:30ad:",
+        "] 00:312d:",
+        "] 00:412d:",
+        "] 00:48ad:",
+        "] 00:492d:",
+        "] 00:4cad:",
+        */
+
+        /// <summary>
+        /// ダメージ関係のログを示すキーワード
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        public static readonly Regex DamageLogPattern =
+            new Regex(
+                @"\] 00:..(29|a9|2d|ad):",
+                RegexOptions.Compiled |
+                RegexOptions.IgnoreCase |
+                RegexOptions.ExplicitCapture);
+
         /// <summary>
         /// 設定によらず必ずカットするログのキーワード
         /// </summary>
         public static readonly string[] IgnoreLogKeywords = new[]
         {
-            MessageType.NetworkDoT.ToKeyword()
+            MessageType.NetworkDoT.ToKeyword(),
         };
 
         /// <summary>
@@ -446,6 +500,12 @@ namespace ACT.SpecialSpellTimer
 
                 // 無効なログ行をカットする
                 if (IgnoreLogKeywords.Any(x => logLine.Contains(x)))
+                {
+                    continue;
+                }
+
+                // ダメージ系ログをカットする
+                if (DamageLogPattern.IsMatch(logLine))
                 {
                     continue;
                 }
