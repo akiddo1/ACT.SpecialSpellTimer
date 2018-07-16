@@ -505,18 +505,17 @@ namespace ACT.SpecialSpellTimer
                 }
 
                 // ダメージ系ログをカットする
-                if (DamageLogPattern.IsMatch(logLine))
+                if (Settings.Default.IgnoreDamageLogs &&
+                    DamageLogPattern.IsMatch(logLine))
                 {
                     continue;
                 }
 
-                if (Settings.Default.IgnoreDetailLogs)
+                // 詳細なログをカット
+                if (Settings.Default.IgnoreDetailLogs &&
+                    IgnoreDetailLogKeywords.Any(x => logLine.Contains(x)))
                 {
-                    // 詳細なログをカットする
-                    if (IgnoreDetailLogKeywords.Any(x => logLine.Contains(x)))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
                 // エフェクトに付与されるツールチップ文字を除去する

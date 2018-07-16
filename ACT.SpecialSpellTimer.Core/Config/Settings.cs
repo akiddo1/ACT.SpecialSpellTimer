@@ -332,6 +332,14 @@ namespace ACT.SpecialSpellTimer.Config
             set => this.SetProperty(ref this.ignoreDetailLogs, value);
         }
 
+        private bool ignoreDamageLogs = true;
+
+        public bool IgnoreDamageLogs
+        {
+            get => this.ignoreDamageLogs;
+            set => this.SetProperty(ref this.ignoreDamageLogs, value);
+        }
+
         public bool DetectPacketDump { get; set; }
 
         private bool resetOnWipeOut;

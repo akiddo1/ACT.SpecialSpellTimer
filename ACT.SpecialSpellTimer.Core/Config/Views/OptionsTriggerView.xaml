@@ -83,6 +83,7 @@
     <!--
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledCompleteUnknownSkill}" IsChecked="{Binding Config.ToComplementUnknownSkill, Mode=TwoWay}" />
     -->
+    <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledIgnoreDamageLogs}" IsChecked="{Binding Config.IgnoreDamageLogs, Mode=TwoWay}" />
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledIgnoreDetailLogs}" IsChecked="{Binding Config.IgnoreDetailLogs, Mode=TwoWay}" />
     <CheckBox Margin="0 15 0 0" Content="{DynamicResource Options_EnabledDetectPacketDump}" IsChecked="{Binding Config.DetectPacketDump, Mode=TwoWay}" />
 

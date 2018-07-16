@@ -868,7 +868,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     }
 
                     // ダメージ系ログをカットする
-                    if (LogBuffer.DamageLogPattern.IsMatch(logLine))
+                    if (Settings.Default.IgnoreDamageLogs &&
+                        LogBuffer.DamageLogPattern.IsMatch(logLine))
                     {
                         continue;
                     }
