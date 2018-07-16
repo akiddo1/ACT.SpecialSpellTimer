@@ -867,6 +867,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                         continue;
                     }
 
+                    // ダメージ系ログをカットする
+                    if (LogBuffer.DamageLogPattern.IsMatch(logLine))
+                    {
+                        continue;
+                    }
+
                     // 無効キーワードが含まれていればスキップする
                     if (ignores.Any(x => logLine.Contains(x.Keyword)))
                     {

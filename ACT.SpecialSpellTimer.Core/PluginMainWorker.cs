@@ -67,6 +67,11 @@ namespace ACT.SpecialSpellTimer
         private DateTime lastWipeOutDateTime = DateTime.MinValue;
 
         /// <summary>
+        /// 最後に全滅を判定した日時
+        /// </summary>
+        private DateTime lastWipeOutDetectDateTime = DateTime.MinValue;
+
+        /// <summary>
         /// ログバッファ
         /// </summary>
         public LogBuffer LogBuffer { get; private set; }
@@ -312,13 +317,16 @@ namespace ACT.SpecialSpellTimer
             var logs = logsTask.Result;
             if (logs.Count > 0)
             {
-                triggers.AsParallel().ForAll((trigger) =>
+                if (triggers.Count > 0)
                 {
-                    foreach (var log in logs)
+                    triggers.AsParallel().ForAll((trigger) =>
                     {
-                        trigger.MatchTrigger(log.Log);
-                    }
-                });
+                        foreach (var log in logs)
+                        {
+                            trigger.MatchTrigger(log.Log);
+                        }
+                    });
+                }
 
                 existsLog = true;
             }
@@ -481,6 +489,14 @@ namespace ACT.SpecialSpellTimer
             {
                 return;
             }
+
+            // 0.1秒毎に判定する
+            if ((DateTime.Now - this.lastWipeOutDetectDateTime).TotalSeconds <= 0.1)
+            {
+                return;
+            }
+
+            this.lastWipeOutDetectDateTime = DateTime.Now;
 
             var combatants = FFXIVPlugin.Instance.GetPartyList();
 
