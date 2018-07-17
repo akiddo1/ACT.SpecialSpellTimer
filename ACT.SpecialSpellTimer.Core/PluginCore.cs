@@ -143,8 +143,9 @@ namespace ACT.SpecialSpellTimer
                     Logger.Init();
                     Logger.Write("[SPESPE] Start InitPlugin");
 
-                    // .NET Frameworkのバージョンを確認する
-                    if (!UpdateChecker.IsAvailableDotNet())
+                    // .NET FrameworkとOSのバージョンを確認する
+                    if (!UpdateChecker.IsAvailableDotNet() ||
+                        !UpdateChecker.IsAvailableWindows())
                     {
                         return;
                     }
