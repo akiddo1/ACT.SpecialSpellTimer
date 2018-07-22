@@ -183,7 +183,9 @@ namespace ACT.SpecialSpellTimer.Image
                 name = name.Split('\\').LastOrDefault();
             }
 
-            return this.EnumerateIcon().FirstOrDefault(x => x.Name == name);
+            return this.EnumerateIcon().FirstOrDefault(x =>
+                string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(Path.GetFileNameWithoutExtension(x.Name), name, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
