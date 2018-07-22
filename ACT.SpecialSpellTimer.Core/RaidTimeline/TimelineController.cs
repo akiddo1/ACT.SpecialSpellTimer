@@ -957,22 +957,18 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     detectors.AddRange(acts);
 
                     // カレントサブルーチンのトリガを登録する
-                    if (this.ActiveActivity != null)
+                    if (this.CurrentSubroutine != null)
                     {
-                        var sub = this.ActiveActivity.Parent as TimelineSubroutineModel;
-                        if (sub != null)
-                        {
-                            var triggers =
-                                from x in sub.Triggers
-                                where
-                                x.Enabled.GetValueOrDefault() &&
-                                !string.IsNullOrEmpty(x.SyncKeyword) &&
-                                x.SyncRegex != null
-                                select
-                                x;
+                        var triggers =
+                            from x in this.CurrentSubroutine.Triggers
+                            where
+                            x.Enabled.GetValueOrDefault() &&
+                            !string.IsNullOrEmpty(x.SyncKeyword) &&
+                            x.SyncRegex != null
+                            select
+                            x;
 
-                            detectors.AddRange(triggers);
-                        }
+                        detectors.AddRange(triggers);
                     }
                 }
             }
@@ -1243,21 +1239,17 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                         x);
 
                     // カレントサブルーチンのトリガを登録する
-                    if (this.ActiveActivity != null)
+                    if (this.CurrentSubroutine != null)
                     {
-                        var sub = this.ActiveActivity.Parent as TimelineSubroutineModel;
-                        if (sub != null)
-                        {
-                            var triggers =
-                                from x in sub.Triggers
-                                where
-                                x.IsAvailable() &&
-                                x.IsPositionSyncAvailable
-                                select
-                                x;
+                        var triggers =
+                            from x in this.CurrentSubroutine.Triggers
+                            where
+                            x.IsAvailable() &&
+                            x.IsPositionSyncAvailable
+                            select
+                            x;
 
-                            detectors.AddRange(triggers);
-                        }
+                        detectors.AddRange(triggers);
                     }
                 }
             }
@@ -1496,6 +1488,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             private set;
         }
 
+        public TimelineSubroutineModel CurrentSubroutine
+        {
+            get;
+            private set;
+        }
+
         public void StartActivityLine()
         {
             if (!TimelineSettings.Instance.Enabled)
@@ -1711,7 +1709,8 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 {
                     if (count == 0)
                     {
-                        this.Model.SubName = (x.Parent as TimelineSubroutineModel)?.Name ?? string.Empty;
+                        this.CurrentSubroutine = x.Parent as TimelineSubroutineModel;
+                        this.Model.SubName = this.CurrentSubroutine?.Name ?? string.Empty;
 
                         x.IsTop = true;
                         x.Opacity = 1.0d;
