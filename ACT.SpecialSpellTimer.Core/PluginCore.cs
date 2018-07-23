@@ -323,7 +323,7 @@ namespace ACT.SpecialSpellTimer
             this.SwitchVisibleButton = new CheckBox()
             {
                 Name = "SpecialSpellTimerSwitchVisibleButton",
-                Text = Translate.Get("SupeSupe"),
+                Text = "SPESPE",
                 TextAlign = ContentAlignment.MiddleCenter,
                 Appearance = Appearance.Button,
                 FlatStyle = FlatStyle.Flat,

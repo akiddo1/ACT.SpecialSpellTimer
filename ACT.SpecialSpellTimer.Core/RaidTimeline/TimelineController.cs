@@ -1709,7 +1709,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                 {
                     if (count == 0)
                     {
-                        this.CurrentSubroutine = x.Parent as TimelineSubroutineModel;
+                        var sub = x.Parent as TimelineSubroutineModel;
+                        if (this.CurrentSubroutine != sub)
+                        {
+                            this.CurrentSubroutine = sub;
+                        }
+
                         this.Model.SubName = this.CurrentSubroutine?.Name ?? string.Empty;
 
                         x.IsTop = true;

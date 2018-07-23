@@ -160,7 +160,7 @@ namespace ACT.SpecialSpellTimer.Sound
             }
             catch (Exception ex)
             {
-                Logger.Write(Translate.Get("SoundError"), ex);
+                Logger.Write("Play sound error.", ex);
             }
         }
 
