@@ -839,8 +839,12 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
 
                 preLog = log.logLine;
 
+                logs.Add(log);
+            }
+
+            foreach (var log in logs)
+            {
                 // 無効なログ？
-                // 無効なログをカットする
                 if (ignores.Any(x => log.logLine.Contains(x.Keyword)))
                 {
                     continue;
@@ -852,12 +856,6 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     continue;
                 }
 
-                logs.Add(log);
-                Thread.Yield();
-            }
-
-            foreach (var log in logs)
-            {
                 this.AnalyzeLogLine(log);
                 Thread.Yield();
             }
