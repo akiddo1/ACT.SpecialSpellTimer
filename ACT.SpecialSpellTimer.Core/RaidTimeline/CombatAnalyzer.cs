@@ -825,6 +825,7 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
             }
 
             var preLog = string.Empty;
+
             var ignores = TimelineSettings.Instance.IgnoreLogTypes.Where(x => x.IsIgnore);
 
             var logs = new List<LogLineEventArgs>(this.logInfoQueue.Count);
@@ -845,7 +846,14 @@ namespace ACT.SpecialSpellTimer.RaidTimeline
                     continue;
                 }
 
+                // ダメージ系の不要なログか？
+                if (LogBuffer.DamageLogPattern.IsMatch(log.logLine))
+                {
+                    continue;
+                }
+
                 logs.Add(log);
+                Thread.Yield();
             }
 
             foreach (var log in logs)
